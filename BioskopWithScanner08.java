@@ -3,16 +3,16 @@ import java.util.Scanner;
 public class BioskopWithScanner08 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        
-        // Array 2D dengan ukuran 4x3 untuk menyimpan penonton
+
         String[][] penonton = new String[4][3];
         int pilihan;
+        int jumlahPenonton = 0;
 
         do {
             System.out.println("~MENU~");
-            System.out.println("1. Input data penonton");
-            System.out.println("2. Tampilkan daftar penonton");
-            System.out.println("3. Exit");
+            System.out.println("1. Input data penonton: ");
+            System.out.println("2. Tampilkan daftar penonton: ");
+            System.out.println("3. Exit ");
             System.out.print("Pilih menu: ");
             
             pilihan = input.nextInt();
@@ -20,51 +20,34 @@ public class BioskopWithScanner08 {
 
             switch (pilihan) {
                 case 1:
-                    // Meminta nomor baris dan kolom dari pengguna
-                    System.out.print("Masukkan nomor baris (0-3): ");
-                    int baris = input.nextInt();
-                    System.out.print("Masukkan nomor kolom (0-2): ");
-                    int kolom = input.nextInt();
-                    input.nextLine(); // Membersihkan buffer
-
-                    // Validasi apakah nomor baris dan kolom tersedia
-                    if (baris < 0 || baris >= penonton.length || kolom < 0 || kolom >= penonton[0].length) {
-                        System.out.println("Nomor baris atau kolom tidak tersedia. Silakan coba lagi.");
-                    } else if (penonton[baris][kolom] != null) {
-                        System.out.println("Kursi di baris " + baris + ", kolom " + kolom + " sudah terisi. Pilih kursi lain.");
-                    } else {
+                    if (jumlahPenonton < penonton.length) {
+                        System.out.println();
                         System.out.print("Masukkan nama penonton: ");
-                        penonton[baris][kolom] = input.nextLine();
-                        System.out.println("Data penonton berhasil ditambahkan di kursi [" + baris + "][" + kolom + "].");
+                        penonton[jumlahPenonton][0] = input.nextLine();
+                        jumlahPenonton++;
+                        System.out.println("Data penonton berhasil ditambahkan.");
+                    } else {
+                        System.out.println("Kapasitas maksimum penonton telah tercapai.");
                     }
                     break;
-
-                case 2:
+                    case 2:
                     System.out.println("Daftar Penonton:");
-                    boolean kosong = true;
-                    for (int i = 0; i < penonton.length; i++) {
-                        for (int j = 0; j < penonton[i].length; j++) {
-                            if (penonton[i][j] != null) {
-                                System.out.println("Kursi [" + i + "][" + j + "] : " + penonton[i][j]);
-                                kosong = false;
-                            }
+                    if (jumlahPenonton == 0) {
+                        System.out.println("Belum ada data penonton.");
+                    } else {
+                        for (int i = 0; i < jumlahPenonton; i++) {
+                            System.out.println((i + 1) + ". " + penonton[i][0]);
                         }
                     }
-                    if (kosong) {
-                        System.out.println("Belum ada data penonton.");
-                    }
                     break;
-
                 case 3:
                     System.out.println("Keluar dari program.");
                     break;
-
+            
                 default:
-                    System.out.println("Pilihan tidak valid. Silakan pilih menu yang tersedia.");
+                System.out.println("Pilihan tidak valid. Silakan pilih menu yang tersedia.");
             }
-            System.out.println();
+            System.out.println(); 
         } while (pilihan != 3);
-
-        input.close();
     }
 }
