@@ -13,7 +13,7 @@ public class BioskopWithScanner08 {
             System.out.println("2. Tampilkan daftar penonton");
             System.out.println("3. Exit");
             System.out.print("Pilih menu: ");
-            
+
             pilihan = input.nextInt();
             input.nextLine();
 
@@ -25,17 +25,18 @@ public class BioskopWithScanner08 {
                         baris = input.nextInt();
                         System.out.print("Masukkan nomor kolom (0-2): ");
                         kolom = input.nextInt();
-                        input.nextLine(); 
+                        input.nextLine();
 
                         if (baris < 0 || baris >= penonton.length || kolom < 0 || kolom >= penonton[0].length) {
                             System.out.println("Nomor baris atau kolom tidak tersedia. Silakan coba lagi.");
                         } else if (penonton[baris][kolom] != null) {
-                            System.out.println("Kursi di baris " + baris + ", kolom " + kolom + " sudah terisi. Pilih kursi lain.");
+                            System.out.println("Kursi di baris " + baris + ", kolom " + kolom
+                                    + " sudah terisi. Pilih kursi lain.");
                         } else {
-                            break; 
+                            break;
                         }
                     }
-                    
+
                     System.out.print("Masukkan nama penonton: ");
                     penonton[baris][kolom] = input.nextLine();
                     System.out.println("Data penonton berhasil ditambahkan di kursi [" + baris + "][" + kolom + "].");
@@ -46,9 +47,9 @@ public class BioskopWithScanner08 {
                     boolean kosong = true;
                     for (int i = 0; i < penonton.length; i++) {
                         for (int j = 0; j < penonton[i].length; j++) {
-                            if (penonton[i][j] != null) {
-                                System.out.println("Kursi [" + i + "][" + j + "]: " + penonton[i][j]);
-                                kosong = false;
+                            String penontondata = (penonton[i][j] == null) ? "***" : penonton[i][j];
+                            {
+                                System.out.println("Kursi [" + i + "][" + j + "]: " + penontondata);
                             }
                         }
                     }
